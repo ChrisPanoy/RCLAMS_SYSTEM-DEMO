@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - Demo Version</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .pro-header {
+            background: var(--primary);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 20rem;
+            z-index: 20;
+        }
+
+        .glass-sidebar {
+            background: #ffffff;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 20rem;
+            z-index: 10001;
+            padding-top: 36px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 28px;
+            font-weight: 700;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-right: 4px solid transparent;
+        }
+
+        .sidebar-link.active {
+            background: #f0f7ff;
+            color: #2563eb;
+            border-right: 4px solid #2563eb;
+        }
+
+        .sidebar-link:hover:not(.active) {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .sidebar-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
+        }
+
+        main {
+            margin-left: 20rem;
+            padding: 100px 32px 32px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .demo-badge {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: #f59e0b;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 60;
+        }
+
+        @media (max-width: 1024px) {
+            .pro-header {
+                left: 0;
+                width: 100%;
+            }
+
+            .glass-sidebar {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo-badge">DEMO VERSION</div>
+
+    <div id="sidebar" class="glass-sidebar">
+        <div class="flex flex-col items-center mb-8 px-2">
+            <img src="../assets/img/logo.png" alt="Logo"
+                class="w-24 h-24 rounded-full border-4 border-blue-100 shadow-sm mb-4">
+            <h2 class="text-xl font-bold text-gray-800">Faculty Panel</h2>
+            <p class="text-sm text-gray-500">Dr. Christopher Panoy</p>
+        </div>
+
+        <nav class="flex flex-col h-full">
+            <a href="dashboard.html" class="sidebar-link active"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="quick_scan.html" class="sidebar-link"><i class="fa-solid fa-qrcode"></i>Quick Scan</a>
+            <a href="my_students.html" class="sidebar-link"><i class="fa-solid fa-users"></i>My Students</a>
+            <a href="attendance_records.html" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i>Attendance
+                Records</a>
+            <a href="my_profile.html" class="sidebar-link"><i class="fa-solid fa-user"></i>My Profile</a>
+
+            <div class="sidebar-footer mt-auto pb-8">
+                <a href="../admin/dashboard.html" class="sidebar-link text-blue-600 font-bold"><i
+                        class="fa-solid fa-user-shield"></i>Admin Portal</a>
+                <a href="../student/dashboard_lab_a.html" class="sidebar-link text-indigo-600 font-bold"><i
+                        class="fa-solid fa-desktop"></i>Student Terminal</a>
+                <a href="../index.html" class="sidebar-link text-red-600 font-bold mt-4"><i
+                        class="fa-solid fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </nav>
+    </div>
+
+    <header class="pro-header">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold text-white">Welcome, Faculty Christopher</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium">
+                <i class="fas fa-clock mr-2"></i><span id="headerClock">12:00:00 PM</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card bg-gradient-to-br from-blue-500 to-blue-600 text-white border-none">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <p class="text-blue-100 text-sm font-medium">Total Students</p>
+                        <h3 class="text-3xl font-bold">156</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-gradient-to-br from-emerald-500 to-emerald-600 text-white border-none">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <p class="text-emerald-100 text-sm font-medium">Present Today</p>
+                        <h3 class="text-3xl font-bold">142</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-gradient-to-br from-indigo-500 to-indigo-600 text-white border-none">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>
+                        <p class="text-indigo-100 text-sm font-medium">Ongoing Classes</p>
+                        <h3 class="text-3xl font-bold">2</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+                <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="fas fa-chart-line text-blue-500"></i> Weekly Attendance Trend
+                </h3>
+                <div style="height: 300px;">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="fas fa-venus-mars text-pink-500"></i> Attendance by Gender
+                </h3>
+                <div style="height: 300px;">
+                    <canvas id="genderChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-gray-800">My Schedule (Today)</h3>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase">Live</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-gray-400 text-sm uppercase tracking-wider">
+                            <th class="pb-4 font-semibold">Subject</th>
+                            <th class="pb-4 font-semibold">Time</th>
+                            <th class="pb-4 font-semibold">Laboratory</th>
+                            <th class="pb-4 font-semibold">Status</th>
+                            <th class="pb-4 font-semibold">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+                        <tr class="border-t border-gray-100">
+                            <td class="py-4">
+                                <p class="font-bold text-gray-800">Networking 2</p>
+                                <p class="text-xs">NET201</p>
+                            </td>
+                            <td class="py-4 font-medium">08:00 AM - 10:00 AM</td>
+                            <td class="py-4">Computer Lab A</td>
+                            <td class="py-4">
+                                <span
+                                    class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">COMPLETED</span>
+                            </td>
+                            <td class="py-4">
+                                <a href="my_students.html"
+                                    class="text-blue-600 hover:text-blue-800 font-bold text-sm">View List</a>
+                            </td>
+                        </tr>
+                        <tr class="border-t border-gray-100">
+                            <td class="py-4">
+                                <p class="font-bold text-gray-800">Software Engineering</p>
+                                <p class="text-xs">SE402</p>
+                            </td>
+                            <td class="py-4 font-medium">01:00 PM - 03:00 PM</td>
+                            <td class="py-4">Computer Lab B</td>
+                            <td class="py-4">
+                                <span
+                                    class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">ONGOING</span>
+                            </td>
+                            <td class="py-4">
+                                <a href="quick_scan.html"
+                                    class="text-blue-600 hover:text-blue-800 font-bold text-sm">Manage Scan</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('headerClock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Charts
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(weeklyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                datasets: [{
+                    label: 'Attendance Rate %',
+                    data: [92, 88, 95, 91, 85],
+                    borderColor: '#2563eb',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        const genderCtx = document.getElementById('genderChart').getContext('2d');
+        new Chart(genderCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    data: [82, 60],
+                    backgroundColor: ['#3b82f6', '#ec4899']
+                }]
+            },
+            options: { maintainAspectRatio: false }
+        });
+    </script>
+
+</body>
+
+</html>

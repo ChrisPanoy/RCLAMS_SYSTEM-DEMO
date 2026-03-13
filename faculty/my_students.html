@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Students - Faculty Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .pro-header {
+            background: var(--primary);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 20rem;
+            z-index: 20;
+        }
+
+        .glass-sidebar {
+            background: #ffffff;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 20rem;
+            z-index: 10001;
+            padding-top: 36px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 28px;
+            font-weight: 700;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-right: 4px solid transparent;
+        }
+
+        .sidebar-link.active {
+            background: #f0f7ff;
+            color: #2563eb;
+            border-right: 4px solid #2563eb;
+        }
+
+        .sidebar-link:hover:not(.active) {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .sidebar-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
+        }
+
+        main {
+            margin-left: 20rem;
+            padding: 100px 32px 32px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .demo-badge {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: #f59e0b;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 60;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo-badge">DEMO VERSION</div>
+
+    <div id="sidebar" class="glass-sidebar">
+        <div class="flex flex-col items-center mb-8 px-2">
+            <img src="../assets/img/logo.png" alt="Logo"
+                class="w-24 h-24 rounded-full border-4 border-blue-100 shadow-sm mb-4">
+            <h2 class="text-xl font-bold text-gray-800">Faculty Panel</h2>
+            <p class="text-sm text-gray-500">Dr. Christopher Panoy</p>
+        </div>
+
+        <nav class="flex flex-col h-full">
+            <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="quick_scan.html" class="sidebar-link"><i class="fa-solid fa-qrcode"></i>Quick Scan</a>
+            <a href="my_students.html" class="sidebar-link active"><i class="fa-solid fa-users"></i>My Students</a>
+            <a href="attendance_records.html" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i>Attendance
+                Records</a>
+            <a href="my_profile.html" class="sidebar-link"><i class="fa-solid fa-user"></i>My Profile</a>
+
+            <div class="sidebar-footer mt-auto pb-8">
+                <a href="../admin/dashboard.html" class="sidebar-link text-blue-600 font-bold"><i
+                        class="fa-solid fa-user-shield"></i>Admin Portal</a>
+                <a href="../student/dashboard_lab_a.html" class="sidebar-link text-indigo-600 font-bold"><i
+                        class="fa-solid fa-desktop"></i>Student Terminal</a>
+                <a href="../index.html" class="sidebar-link text-red-600 font-bold mt-4"><i
+                        class="fa-solid fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </nav>
+    </div>
+
+    <header class="pro-header">
+        <div class="flex items-center gap-4">
+            <h1 class="text-xl font-bold text-white">Student Roster</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex gap-4">
+                <select
+                    class="bg-white border border-gray-200 px-4 py-2 rounded-lg font-semibold text-gray-600 shadow-sm">
+                    <option>All Sections</option>
+                    <option>BSIS 4-A</option>
+                    <option>BSIS 4-B</option>
+                </select>
+                <input type="text" placeholder="Search student name..."
+                    class="bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            </div>
+            <button
+                class="bg-emerald-600 text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-emerald-700 transition">
+                <i class="fas fa-file-excel mr-2"></i>Export List
+            </button>
+        </div>
+
+        <div class="card p-0 overflow-hidden">
+            <table class="w-full text-left">
+                <thead>
+                    <tr
+                        class="bg-gray-50 border-b border-gray-100 text-gray-400 text-xs font-bold uppercase tracking-wider">
+                        <th class="p-6">Student</th>
+                        <th class="p-6">ID Number</th>
+                        <th class="p-6">Section</th>
+                        <th class="p-6">Course</th>
+                        <th class="p-6">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 divide-y divide-gray-50">
+                    <tr class="hover:bg-blue-50/50 transition duration-150">
+                        <td class="p-6">
+                            <div class="flex items-center gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Juan+Dela+Cruz"
+                                    class="w-10 h-10 rounded-full border">
+                                <span class="font-bold text-gray-800">Dela Cruz, Juan</span>
+                            </div>
+                        </td>
+                        <td class="p-6">2025-0001</td>
+                        <td class="p-6 font-medium text-blue-600">BSIS 4-A</td>
+                        <td class="p-6">BSIS</td>
+                        <td class="p-6">
+                            <button class="text-gray-400 hover:text-blue-600 font-bold transition"><i
+                                    class="fas fa-address-card mr-1"></i> Profile</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-blue-50/50 transition duration-150">
+                        <td class="p-6">
+                            <div class="flex items-center gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Maria+Clara"
+                                    class="w-10 h-10 rounded-full border">
+                                <span class="font-bold text-gray-800">Clara, Maria</span>
+                            </div>
+                        </td>
+                        <td class="p-6">2025-0002</td>
+                        <td class="p-6 font-medium text-blue-600">BSIS 4-A</td>
+                        <td class="p-6">BSIS</td>
+                        <td class="p-6">
+                            <button class="text-gray-400 hover:text-blue-600 font-bold transition"><i
+                                    class="fas fa-address-card mr-1"></i> Profile</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-blue-50/50 transition duration-150">
+                        <td class="p-6">
+                            <div class="flex items-center gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Jose+Rizal"
+                                    class="w-10 h-10 rounded-full border">
+                                <span class="font-bold text-gray-800">Rizal, Jose</span>
+                            </div>
+                        </td>
+                        <td class="p-6">2025-0003</td>
+                        <td class="p-6 font-medium text-blue-600">BSIS 4-B</td>
+                        <td class="p-6">BSIS</td>
+                        <td class="p-6">
+                            <button class="text-gray-400 hover:text-blue-600 font-bold transition"><i
+                                    class="fas fa-address-card mr-1"></i> Profile</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+
+</html>

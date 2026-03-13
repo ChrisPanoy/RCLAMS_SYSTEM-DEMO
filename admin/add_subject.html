@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Add Subject - Demo Version</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root{
+            --bg1: #f0f9ff;
+            --bg2: #eefcff;
+            --primary: #0369a1;
+            --accent: #38bdf8;
+            --card-bg: #ffffff;
+            --border: #dbeffd;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(120deg, var(--bg1) 0%, var(--bg2) 100%);
+            min-height: 100vh;
+        }
+        .pro-header {
+            background: #2563eb !important;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 20rem;
+            z-index: 20;
+        }
+        .glass-sidebar{
+            background: #ffffff;
+            box-shadow: 0 6px 24px rgba(31,38,135,0.06);
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 20rem;
+            z-index: 10001;
+            padding-top: 36px;
+            overflow-y: auto;
+            border-right: 1px solid #f1f5f9;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 28px;
+            font-weight: 700;
+            color: #374151;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .sidebar-link i {
+            width: 28px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .sidebar-link.active, .sidebar-link:hover {
+            background: #0f52d8;
+            color: #fff !important;
+            box-shadow: 0 4px 12px rgba(15, 82, 216, 0.2);
+        }
+        .sidebar-logo-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #dbeffd;
+            margin-bottom: 12px;
+            background: #fff;
+            object-fit: contain;
+        }
+        main {
+            margin-left: 20rem;
+            padding: 100px 32px 32px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 6px 22px rgba(16,24,40,0.04);
+            border: 1px solid var(--border);
+        }
+        .demo-badge {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: #f59e0b;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 60;
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-badge">DEMO VERSION</div>
+
+    <div id="sidebar" class="glass-sidebar">
+        <div class="flex flex-col items-center mb-8 px-2">
+            <img src="../assets/img/logo.png" alt="Logo" class="sidebar-logo-img">
+            <h2 class="text-xl font-bold text-blue-700">RCLAMS Admin</h2>
+            <p class="text-xs text-gray-500 mt-1">System Management</p>
+        </div>
+
+        <nav class="flex flex-col gap-1">
+            <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i>Dashboard</a>
+            <a href="master_list.html" class="sidebar-link"><i class="fa-solid fa-user-graduate"></i>Master List</a>
+            <a href="students.html" class="sidebar-link"><i class="fa-solid fa-users-line"></i>Students</a>
+            <a href="faculty.html" class="sidebar-link"><i class="fa-solid fa-user-plus"></i>Faculty</a>
+            <a href="attendance.html" class="sidebar-link"><i class="fa-solid fa-calendar-check"></i>Attendance</a>
+            <hr class="my-3 border-gray-100">
+            <a href="add_subject.html" class="sidebar-link active"><i class="fa-solid fa-book-medical"></i>Add Subject</a>
+            <a href="academic_settings.html" class="sidebar-link"><i class="fa-solid fa-gears"></i>Academic Settings</a>
+            <a href="../faculty/dashboard.html" class="sidebar-link text-indigo-600"><i class="fa-solid fa-chalkboard-teacher"></i>Faculty Portal</a>
+            <a href="../student/dashboard_lab_a.html" class="sidebar-link text-blue-600"><i class="fa-solid fa-desktop"></i>Student Terminal</a>
+            <a href="../index.html" class="sidebar-link text-red-600 mt-6"><i class="fa-solid fa-sign-out-alt"></i>Logout System</a>
+        </nav>
+    </div>
+
+<header class="pro-header">
+    <div class="flex items-center gap-4">
+        <h1 class="text-white text-xl font-bold">Curriculum Management</h1>
+    </div>
+</header>
+
+<main>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="card">
+            <h3 class="text-lg font-bold text-gray-800 mb-6 border-b pb-2">Add New Subject</h3>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Demo: Subject added to master list.')">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Subject Code</label>
+                    <input type="text" placeholder="e.g., NET201" class="w-full p-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Subject Name</label>
+                    <input type="text" placeholder="e.g., Networking 2" class="w-full p-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Department</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option>College of Computer Studies</option>
+                        <option>College of Engineering</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Save Subject</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3 class="font-bold text-gray-800 mb-4">Existing Subjects</h3>
+            <div class="space-y-3">
+                <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center border border-gray-100">
+                    <div>
+                        <span class="text-xs font-black text-blue-600">NET201</span>
+                        <h4 class="font-bold text-gray-700">Networking 2</h4>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center border border-gray-100">
+                    <div>
+                        <span class="text-xs font-black text-blue-600">SE402</span>
+                        <h4 class="font-bold text-gray-700">Software Engineering</h4>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center border border-gray-100">
+                    <div>
+                        <span class="text-xs font-black text-blue-600">DB101</span>
+                        <h4 class="font-bold text-gray-700">Database Systems</h4>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
