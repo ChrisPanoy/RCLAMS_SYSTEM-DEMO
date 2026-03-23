@@ -6,6 +6,7 @@
     <title>Academic Settings - Demo Version</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/mobile.css">
     <style>
         :root{
             --bg1: #f0f9ff;
@@ -191,5 +192,25 @@
     </div>
 </main>
 
+    <script>
+        // Mobile Sidebar Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        if (sidebar && mobileMenuToggle) {
+            mobileMenuToggle.onclick = (e) => {
+                sidebar.classList.toggle('open');
+                document.body.classList.toggle('sidebar-open');
+                e.stopPropagation();
+            };
+
+            document.onclick = (e) => {
+                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                    document.body.classList.remove('sidebar-open');
+                }
+            };
+        }
+    </script>
 </body>
 </html>

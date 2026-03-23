@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/mobile.css">
     <style>
         :root {
             --bg1: #f0f9ff;
@@ -164,6 +165,10 @@
 <body>
 
     <div class="demo-badge">DEMO VERSION</div>
+
+    <button id="mobileMenuToggle" class="sidebar-hamburger">
+        <i class="fas fa-bars-staggered"></i>
+    </button>
 
     <div id="sidebar" class="glass-sidebar">
         <div class="flex flex-col items-center mb-8 px-2">
@@ -351,6 +356,28 @@
             },
             options: { maintainAspectRatio: false }
         });
+
+        // Mobile Sidebar Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        if (sidebar && mobileMenuToggle) {
+            mobileMenuToggle.onclick = (e) => {
+                sidebar.classList.toggle('open');
+                sidebar.classList.toggle('!display-block'); // In case of display:none override
+                sidebar.style.display = sidebar.classList.contains('open') ? 'block' : '';
+                document.body.classList.toggle('sidebar-open');
+                e.stopPropagation();
+            };
+
+            document.onclick = (e) => {
+                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                    sidebar.style.display = '';
+                    document.body.classList.remove('sidebar-open');
+                }
+            };
+        }
     </script>
 
 </body>
